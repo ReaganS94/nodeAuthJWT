@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +15,8 @@ mongoose.connect(uri, () => console.log("mongoDB connected"));
 
 // Middleware
 app.use(express.json()); // This is the body parser.
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
 // Route Middleware
 app.use("/api/user", authRoute);
