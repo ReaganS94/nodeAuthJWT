@@ -19,4 +19,6 @@ app.use(express.json()); // This is the body parser.
 app.use("/api/user", authRoute);
 app.use("/api/posts", postRoute);
 
+app.get("/", (req, res) => res.send("Hello World!"));
+
 app.listen(port, () => console.log(`server running on port ${port}`));
