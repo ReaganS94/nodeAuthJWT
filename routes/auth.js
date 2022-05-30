@@ -26,7 +26,9 @@ router.post("/register", async (req, res) => {
     password: hashedPassword,
   });
   try {
-    const savedUser = await user.save();
+    await user.save();
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+    res.header("auth-token", token);
     res.send({ user: user._id });
   } catch (err) {
     res.status(400).send(err);
@@ -49,7 +51,7 @@ router.post("/login", async (req, res) => {
 
   // Create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header("auth-token", token);
+  // res.header("auth-token", token);
   // To see the token, uncomment this line and comment out the line after and the one before
   res.header("auth-token", token).send(token);
   //   res.send("Logged in");

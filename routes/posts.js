@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const verify = require("./privateRoute");
+const verify = require("../middlewares/privateRoute");
 
 router.get("/", verify, (req, res) => {
   res.json({
